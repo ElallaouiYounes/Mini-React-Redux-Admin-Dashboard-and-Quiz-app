@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { TbBrandRedux } from "react-icons/tb";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const { isLogged, loggedInAdmin } = useSelector((state) => state.auth);
+  // loggedInInfo
+  const {isLogged,loggedInInfo} = useSelector((state) => state.auth);
 
-  
 
   return (
     <div className="flex flex-col w-full h-screen  items-center">
@@ -23,7 +23,9 @@ const HomePage = () => {
         <TbBrandRedux color="#764ABC" size={50} />
       </motion.div>
         <div>
-        {isLogged && loggedInAdmin && (<p>Welcome {loggedInAdmin.fullname}</p>) }
+          {/* logged in admin name */}
+          {isLogged && <p>Welcome {loggedInInfo.fullname}</p>}
+
         </div>
         <motion.div
         animate={{ rotate: 360 }}

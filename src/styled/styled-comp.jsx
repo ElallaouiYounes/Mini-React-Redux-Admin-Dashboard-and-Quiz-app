@@ -72,6 +72,39 @@ cursor: pointer;
     animation: ${shake} 0.3s ease-in-out;
 }
 `
+export const SButton = styled.button`
+width: 80%;
+height: 40px;
+background-color: #764ABC;
+color: white;
+border: none;
+border-radius: 5px;
+font-weight: bolder;
+font-size: larger;
+cursor: pointer;
+&:hover{
+    background-color: transparent;
+    border: 1px solid #764ABC;
+    color: #764ABC;
+}
+`;
+
+export const Dovery = styled.div`
+  width: 20%;
+  height: 100dvh;
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+`;
+export const SidDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 60px;
+    width: 100%;
+    align-items: center;
+`;
 
 export const NewInput = styled.input`
   width: 100%;

@@ -3,23 +3,28 @@ import { Label, NewInputContainer, NewInput, Add, ErrorContainer, SuccesContaine
 import { useDispatch } from "react-redux";
 import { addAdmin } from "../Redux/Actions/adminActions";
 
-const AddAdmin = () => {
 
+
+const AddAdmin = () => {
+  // interface functions
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
   const [succes, setSucces] = useState(false);
 
-
-  const dispatch = useDispatch();
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
+  // declare dispatch
+  const dispatch = useDispatch();
+  
   const handleAddAdmin = () => {
     if (fullname && email && password) {
-      // Dispatch the action with the new admin data
-      dispatch(addAdmin({ fullname, email, password }));
+      // put new admin info in one object to send them as payload
+      const newAdmin = {fullname,email,password}
+
+      // Dispatch action addAdmin with new admin info
+      dispatch(addAdmin(newAdmin));
 
       setSucces(true);
       setTimeout(() => {
@@ -103,7 +108,7 @@ const AddAdmin = () => {
               id="fullname"
               placeholder="Enter your Full Name"
               value={fullname} // Bind state to input field
-              onChange={(e) => setFullname(e.target.value)} // Update state on change
+              onChange={(e) => setFullname(e.target.value)} 
             />
           </NewInputContainer>
         </div>
@@ -117,7 +122,7 @@ const AddAdmin = () => {
               id="email"
               placeholder="Enter your Email"
               value={email} // Bind state to input field
-              onChange={(e) => setEmail(e.target.value)} // Update state on change
+              onChange={(e) => setEmail(e.target.value)} 
             />
           </NewInputContainer>
         </div>
@@ -131,7 +136,7 @@ const AddAdmin = () => {
               id="password"
               placeholder="Enter your Password"
               value={password} // Bind state to input field
-              onChange={(e) => setPassword(e.target.value)} // Update state on change
+              onChange={(e) => setPassword(e.target.value)} 
             />
           </NewInputContainer>
         </div>

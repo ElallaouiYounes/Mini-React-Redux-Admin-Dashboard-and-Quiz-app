@@ -1,12 +1,12 @@
-export const login = (email, password, admins) => {
-  return {
-    type: "LOGIN",
-    payload: { email, password , admins},
-  };
-};
+export const login = (admin) => {
+    return{
+        type: 'LOGIN',
+        payload: admin,
+    }
+}
 
 export const logout = () => {
-  return {
-    type: "LOGOUT",
-  };
-};
+    return {
+        type: 'LOGOUT',
+    }
+}

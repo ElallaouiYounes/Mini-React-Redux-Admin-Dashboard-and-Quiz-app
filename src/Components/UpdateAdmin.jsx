@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { Label, NewInputContainer, NewInput, Add } from "../styled/styled-comp";
+import React, { useState } from "react";
+import {
+  Label,
+  NewInputContainer,
+  NewInput,
+  Add,
+} from "../styled/styled-comp";
 import { MdExitToApp } from "react-icons/md";
-import { exitUpdate } from "../Redux/Actions/adminActions";
-import { useSelector, useDispatch } from "react-redux";
-import { updateAdmin } from "../Redux/Actions/adminActions";
+import { useDispatch, useSelector } from "react-redux";
+import { exitUpdate, updateAdmin } from "../Redux/Actions/adminActions";
+
+
+
 
 const UpdateAdmin = () => {
-  // // Fetch the selected admin data from Redux
-  const adminInfo = useSelector((state) => state.adminRedu.UpdatedAdmin);
+  // Fetch the selected admin info
+  const {UpdatedAdmin} = useSelector((state) => state.adminRedu);
 
-  // Initialize state with admin values (or defaults)
-  const [id, setId] = useState(adminInfo.id);
-  const [fullname, setFullname] = useState(adminInfo?.fullname || "");
-  const [email, setEmail] = useState(adminInfo?.email || "");
-  const [password, setPassword] = useState(adminInfo?.password || "");
+  // fill state with admin info or keep them emty if there isn't any info
+  const [id, setId] = useState(UpdatedAdmin.id);
+  const [fullname, setFullname] = useState(UpdatedAdmin.fullname);
+  const [email, setEmail] = useState(UpdatedAdmin.email);
+  const [password, setPassword] = useState(UpdatedAdmin.password);
 
+  const handleFulname = (e) => {
+    setFullname(e.target.value);
+  };
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // declare dispatch
   const dispatch = useDispatch();
-  // // Sync state with admin when it changes
-  useEffect(() => {
-    if (adminInfo) {
-      setFullname(adminInfo.fullname || "");
-      setEmail(adminInfo.email || "");
-      setPassword(adminInfo.password || "");
-
-    }
-  }, [adminInfo]);
-
-  const handleChanges = (e) => {
-    const { name, value } = e.target;
-    if (name === "fullname") setFullname(value);
-    if (name === "email") setEmail(value);
-    if (name === "password") setPassword(value);
-  };
-
   const handleUpdate = () => {
-    const newAdminInfo = { id, fullname, email, password };
+    // put new admin info in one object to send them as payload
+    const adminChangesInfo = {id,fullname,email,password}
     // Dispatch the action with the updated admin data
-    dispatch(updateAdmin(newAdminInfo));
+    dispatch(updateAdmin(adminChangesInfo))
   };
 
+  // dispatch exit action
   const handleExit = () => {
     dispatch(exitUpdate());
   };
@@ -61,7 +64,14 @@ const UpdateAdmin = () => {
         <div>
           <Label htmlFor="fullname">Full Name : </Label>
           <NewInputContainer>
-            <NewInput type="text" id="fullname" name="fullname" onChange={handleChanges} value={fullname} placeholder="Enter your new Fullname"/>
+            <NewInput
+              type="text"
+              id="fullname"
+              name="fullname"
+              onChange={handleFulname}
+              value={fullname}
+              placeholder="Enter your new Fullname"
+            />
           </NewInputContainer>
         </div>
 
@@ -69,7 +79,14 @@ const UpdateAdmin = () => {
         <div>
           <Label htmlFor="email">Email : </Label>
           <NewInputContainer>
-            <NewInput type="email" id="email" name="email" onChange={handleChanges} value={email} placeholder="Enter your new Email"/>
+            <NewInput
+              type="email"
+              id="email"
+              name="email"
+              onChange={handleEmail}
+              value={email}
+              placeholder="Enter your new Email"
+            />
           </NewInputContainer>
         </div>
 
@@ -77,7 +94,14 @@ const UpdateAdmin = () => {
         <div>
           <Label htmlFor="password">Password : </Label>
           <NewInputContainer>
-            <NewInput type="text" id="password" name="password" onChange={handleChanges} value={password} placeholder="Enter your new Password"/>
+            <NewInput
+              type="text"
+              id="password"
+              name="password"
+              onChange={handlePassword}
+              value={password}
+              placeholder="Enter your new Password"
+            />
           </NewInputContainer>
         </div>
 

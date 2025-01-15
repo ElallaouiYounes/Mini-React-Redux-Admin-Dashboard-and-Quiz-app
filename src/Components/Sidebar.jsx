@@ -4,48 +4,18 @@ import { TbBrandRedux } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { adminDashboard, showAddAdmin, showAdminList, quiz } from "../Redux/Actions/navActions";
-import { exitUpdate } from "../Redux/Actions/adminActions";
+import {Dovery,SidDiv,SButton} from '../styled/styled-comp'
+import { exitUpdate } from '../Redux/Actions/adminActions';
 
-const Dovery = styled.div`
-  width: 20%;
-  height: 100dvh;
-  border-right: 1px solid gray;
-  display: flex;
-  flex-direction: column;
-  padding-top: 30px;
-`;
-const SidDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 60px;
-    width: 100%;
-    align-items: center;
-`;
-const Button = styled.button`
-width: 80%;
-height: 40px;
-background-color: #764ABC;
-color: white;
-border: none;
-border-radius: 5px;
-font-weight: bolder;
-font-size: larger;
-cursor: pointer;
-&:hover{
-    background-color: transparent;
-    border: 1px solid #764ABC;
-    color: #764ABC;
-}
-`;
+
+
 
 const Sidebar = () => {
   const dispatch = useDispatch();
 
-  // Correctly dispatching actions
   const handlAdminList = () => {
     dispatch(showAdminList());
-    dispatch(exitUpdate())
+    dispatch(exitUpdate());
   };
   const handleAddAdmin = () => {
     dispatch(showAddAdmin());
@@ -76,10 +46,10 @@ const Sidebar = () => {
       </div>
       {/*  Components */}
       <SidDiv>
-        <Button onClick={handleAdminDashbord}>Dashbord</Button>
-        <Button onClick={handlAdminList}>Admins List</Button>
-        <Button onClick={handleAddAdmin}>Add Admin</Button>
-        <Button onClick={handleQuiz}>Quiz</Button>
+        <SButton onClick={handleAdminDashbord}>Dashbord</SButton>
+        <SButton onClick={handlAdminList}>Admins List</SButton>
+        <SButton onClick={handleAddAdmin}>Add Admin</SButton>
+        <SButton onClick={handleQuiz}>Quiz</SButton>
       </SidDiv>
     </Dovery>
   );

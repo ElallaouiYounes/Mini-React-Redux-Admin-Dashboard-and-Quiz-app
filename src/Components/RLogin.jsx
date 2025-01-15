@@ -13,37 +13,44 @@ import { CiUser } from "react-icons/ci";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { login } from "../Redux/Actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import {login} from '../Redux/Actions/authActions'
 
 const RLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
-
-  const [inputValue, setInputValue] = useState({ email: "", password: "" });
-  const handleChanges = (e) => {
-    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
-  };
-
-  const dispatch = useDispatch();
-  const { isLogged } = useSelector((state) => state.auth);
-  const { error } = useSelector((state) => state.auth);
-  const admins = useSelector((state) => state.adminRedu.admins);
-
-  const handleLogin = () => {
-    dispatch(login(inputValue.email, inputValue.password, admins));
-  };
-
-  useEffect(() => {
-    if (isLogged) {
-      navigate("/home");
-    }
-  }, [isLogged, navigate]);
-
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // declare dispatch
+  const dispatch =useDispatch()
+
+  // get the isLogged state
+  const {isLogged,error} = useSelector((state) => state.auth);
+
+  const admins =useSelector((state) => state.adminRedu.admins);
+
+  const handleLogin = () => {
+    // send the email and password to the store
+    const info = {email,password,admins};
+    dispatch(login(info))
+  };
+
+  // if the user is logged in, redirect to the home page
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(isLogged){
+      navigate('/home')
+    }
+  }, [isLogged]);
 
   return (
     <div className="w-[50%] h-screen flex flex-col px-20 py-10">
@@ -68,11 +75,10 @@ const RLogin = () => {
       {/*  form */}
       <LoginCont>
         {/*  error field */}
-        {error && (
-          <ErrorContainer>
+
+        {error && <ErrorContainer>
             <p>Incorrect Email or Password</p>
-          </ErrorContainer>
-        )}
+          </ErrorContainer>}
 
         {/*  email input */}
         <motion.div
@@ -86,7 +92,7 @@ const RLogin = () => {
               id="email"
               name="email"
               placeholder="Enter your Email"
-              onChange={handleChanges}
+              onChange={handleEmailChange}
             />
             <Icon>
               <CiUser size={24} />
@@ -106,7 +112,7 @@ const RLogin = () => {
               name="password"
               id="password"
               placeholder="Enter your Password"
-              onChange={handleChanges}
+              onChange={handlePasswordChange}
             />
             <Icon>
               <button onClick={handleShowPassword}>

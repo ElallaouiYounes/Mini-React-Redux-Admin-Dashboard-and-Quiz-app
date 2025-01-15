@@ -2,9 +2,11 @@ import { Tooltip } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../Redux/Actions/authActions";
 import { useEffect } from "react";
+import { logout } from "../Redux/Actions/authActions";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 const Img = styled.img`
   width: 70px;
@@ -31,19 +33,26 @@ const Button = styled.button`
 `;
 
 const Creators = () => {
-  const navigate = useNavigate();
+  // declare dispatch
   const dispatch = useDispatch();
 
-  const { isLogged } = useSelector((state) => state.auth);
   const handleLogout = () => {
-    dispatch(logout());
+    // dispatch logout action
+    dispatch(logout())
   };
 
+  // get is logged state
+  const {isLogged} = useSelector((state) => state.auth)
+
+
+  // if the user is logged out, redirect to the login page
+  const navigate = useNavigate();
   useEffect(() => {
-    if (!isLogged) {
-      navigate("/");
+    if(!isLogged){
+      navigate('/')
     }
-  }, [!isLogged, navigate]);
+
+  }, [!isLogged]);
   return (
     <div className="flex flex-row justify-between items-center w-[100%] py-8 px-4 gap-28 h-24 bg-[#764ABC]">
       <h1 className="font-anton text-5xl font-extrabold text-white">

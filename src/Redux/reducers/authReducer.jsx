@@ -1,35 +1,41 @@
 const initialState = {
-  isLogged: false,
-  loggedInAdmin: null,
-  error: false,
+  isLogged:false,
+  loggedInInfo:null,
+  error:false,
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN":
-      const { email, password, admins } = action.payload;
-      const admin = admins.find(
-        (admin) => admin.email === email && admin.password === password
-      );
-      if (admin) {
-        return {
+      // bring user data
+      const {email,password,admins} = action.payload;
+      // check if user data exists in admins list
+      const admin = admins.find((admin) => 
+        admin.email === email && admin.password === password   
+      )
+
+      if(admin){
+        return{
           ...state,
-          isLogged: true,
-          loggedInAdmin: admin,
-          error: false,
-        };
-      }else{
-        return {
-          ...state,
-          isLogged: false,
-          error: true,
-        };
+          isLogged:true,
+          loggedInInfo:admin,
+        }
       }
+      else{
+        return{
+          ...state,
+          error:true,
+        }
+      }
+
     case "LOGOUT":
-      return {
+      return{
         ...state,
-        isLogged: false,
-      };
+        isLogged:false,
+        loggedInInfo:null,
+        error:false,
+      }
+
     default:
       return state;
   }

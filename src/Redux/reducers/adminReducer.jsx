@@ -31,6 +31,7 @@ const initialState = {
       password: "douaa123",
     },
   ],
+  lastId:5,
   isUpdating: false,
   UpdatedAdmin : null,
 };
@@ -38,41 +39,57 @@ const initialState = {
 export const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_ADMIN":
+      // create new admin
       const newAdmin = {
-        id: state.admins.length + 1,
+        id:state.lastId + 1,
         ...action.payload,
-      };
-      return {
+      }
+
+      return{
         ...state,
-        admins: [...state.admins, newAdmin],
-      };
+        // add new admin to admin list
+        admins: [...state.admins,newAdmin],
+        // increment last id
+        lastId: state.lastId + 1,
+      }
     case "DELETE_ADMIN":
       return {
         ...state,
-        admins: state.admins.filter((admin) => admin.id !== action.payload),
+        // remove admin from admins list using filter
+        admins:state.admins.filter((admin) => 
+          admin.id !== action.payload  
+        ),
       };
       case "START_UPDATE":
         return {
           ...state,
-          isUpdating: true,
+          isUpdating:true,
         };
       case "UPDATED_ADMIN":
         return {
           ...state,
-          UpdatedAdmin: state.admins.find((admin) => admin.id === action.payload),
+          // find the admin from admins list
+          UpdatedAdmin:state.admins.find((admin) =>
+            admin.id === action.payload          
+          ),
         };
       case "UPDATE_ADMIN":
         return {
           ...state,
-          isUpdating: false,
-          UpdatedAdmin: null,
-          admins: state.admins.map((admin)=>
-            admin.id === action.payload.id ? action.payload : admin),
+          // change old info of an admin with new info usin map
+          admins:state.admins.map((admin) => 
+            admin.id === action.payload.id ? action.payload : admin          
+          ),
+          // stop updating
+          isUpdating:false,
+          // clear the updated admin
+          UpdatedAdmin:null,
         };
       case "EXIT_UPDATE":
         return {
           ...state,
-          isUpdating: false,
+          // stop updating
+          isUpdating:false,
         };
 
     default:

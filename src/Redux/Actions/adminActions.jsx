@@ -1,14 +1,14 @@
-export const addAdmin = (admin) => {
-  return {
-    type: "ADD_ADMIN",
-    payload: admin,
-  };
-};
+export const addAdmin = (payload) => {
+  return{
+    type: 'ADD_ADMIN',
+    payload,
+  }
+}
 
 export const deleteAdmin = (id) => {
   return {
     type: "DELETE_ADMIN",
-    payload: id,
+    payload:id,
   };
 };
 
@@ -18,10 +18,10 @@ export const startUpdate = () => {
   };
 }
 
-export const selectAdminForUpdate = (id) => {
+export const selectForUpdate = (id) => {
   return {
     type: "UPDATED_ADMIN",
-    payload: id,
+    payload:id,
   };
 };
 
