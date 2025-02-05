@@ -4,7 +4,6 @@ import { authReducer } from './reducers/authReducer';
 import { adminReducer } from "./reducers/adminReducer";
 import { quizReducer } from "./reducers/quizReducer";
 import { navReducer } from "./reducers/navReducer";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -13,5 +12,5 @@ const rootReducer = combineReducers({
     navRedu: navReducer, 
 });
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer);
 export default store;

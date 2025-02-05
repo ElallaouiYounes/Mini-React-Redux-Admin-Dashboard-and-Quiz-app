@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import left from "../../public/leftImg2.jpg"
 
 const Divy = styled.div`
     width: 50%;
-    background-image: url("../../public/leftImg2.jpg");
+    background-image: url(${left});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -6,6 +6,11 @@ import { useEffect } from "react";
 import { logout } from "../Redux/Actions/authActions";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import younes from "../../public/profile.jpeg";
+import hafsa from "../../public/hafsa.jpg";
+import ayoub from "../../public/ayoub.avif";
+import douaa from "../../public/douaa.avif";
+import yassine from "../../public/yassine.avif";
 
 
 const Img = styled.img`
@@ -61,31 +66,31 @@ const Creators = () => {
       <div className="flex flex-row gap-5 items-center">
         <Tooltip title="Elallaoui Younes" arrow>
           <div className="flex flex-col items-center">
-            <Img src="../../public/profile.jpeg" />
+            <Img src={younes} />
           </div>
         </Tooltip>
 
         <Tooltip title="Karam Hafsa" arrow>
           <div className="flex flex-col items-center">
-            <Img src="../../public/hafsa.jpg"></Img>
+            <Img src={hafsa}></Img>
           </div>
         </Tooltip>
 
         <Tooltip title="Hannas Ayoub" arrow>
           <div className="flex flex-col items-center">
-            <Img src="../../public/ayoub.avif"></Img>
+            <Img src={ayoub}></Img>
           </div>
         </Tooltip>
 
         <Tooltip title="Alaoui Ismaili Douaa" arrow>
           <div className="flex flex-col items-center">
-            <Img src="../../public/douaa.avif"></Img>
+            <Img src={douaa}></Img>
           </div>
         </Tooltip>
 
         <Tooltip title="Bouguarne Yassine" arrow>
           <div className="flex flex-col items-center">
-            <Img src="../../public/yassine.avif"></Img>
+            <Img src={yassine}></Img>
           </div>
         </Tooltip>
       </div>
