@@ -9,9 +9,11 @@ import { BrowserRouter } from 'react-router-dom'
 const basename = '/Mini-React-Redux-Admin-Dashboard-and-Quiz-app/'
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename={basename}>
-  <Provider store={store}>
-      <App />
-  </Provider>
-  </BrowserRouter>,
+  <StrictMode>
+    <BrowserRouter basename={basename}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </StrictMode>
 )
