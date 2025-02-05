@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from './Redux/store'
 import { BrowserRouter } from 'react-router-dom'
 
-const basename = '/React-Redux-Admin-Panel/'
+const basename = '/Mini-React-Redux-Admin-Dashboard-and-Quiz-app/'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename={basename}>
